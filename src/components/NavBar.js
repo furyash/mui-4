@@ -1,9 +1,17 @@
-import { Box } from "@material-ui/core";
+import { AppBar, Box, Toolbar } from "@material-ui/core";
 
 function NavBar(){
     return (
-        <Box sx={{ backgroundColor : "blue", margin: 0}}>
-            NavBar
+        <Box sx={{ backgroundColor : "yellowgreen"}}>
+            hhh
+            <AppBar position="static" >
+                jjj
+                <Toolbar color="inherit">
+                    kkk
+                </Toolbar>
+                jjj
+            </AppBar>
+            hhh
         </Box>
     );
 }
