@@ -3,10 +3,13 @@ import Image from '../img/mainBack.jpg'
 
 function MainDisplay(props) {
     return (
-        <Box sx={{ backgroundImage : `url(${Image})`,
-                    flexGrow : 1 }}>
-            {props.children}
-            hello
+        <Box sx={{ 
+            backgroundImage : `url(${Image})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            height: '100%',}}>
+                {props.children}
         </Box>
     );
 }

@@ -3,12 +3,9 @@ import NavBar from './components/NavBar';
 
 function App() {
   return (
-    <div>
       <MainDisplay>
       <NavBar/>
-      </MainDisplay>
-    </div>
-    
+      </MainDisplay>    
   
   );
 }
