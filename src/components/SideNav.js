@@ -1,14 +1,26 @@
-import { Drawer, IconButton } from "@material-ui/core";
+import {
+  Drawer,
+  IconButton,
+  makeStyles,
+  Toolbar,
+  Box,
+} from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
 import NavBar from "./NavBar";
 
+const useStyles = makeStyles((themes) => ({
+  msr: {
+    width: 240,
+  },
+}));
+
 function SideNav() {
   const [open, setOpen] = React.useState(false);
+  const classes = useStyles();
 
   const toggleDrawer = () => {
-    if (open === true) setOpen(false);
-    else setOpen(true);
+    setOpen(!open);
   };
 
   return (
@@ -19,12 +31,22 @@ function SideNav() {
         variant="persistent"
         anchor="left"
         open={open}
-        sx={{ width: "100%", maxWidth: "200px" }}
+        classes={{ paper: classes.msr }}
       >
-        <IconButton onClick={toggleDrawer}>
-          <CloseIcon />
-        </IconButton>
-        hello
+        <Box
+          sx={{
+            backgroundColor: "rgb(150,0,0)",
+            height: "100%",
+            width: "100%",
+          }}
+        >
+          <Toolbar>
+            <IconButton onClick={toggleDrawer} edge="start">
+              <CloseIcon />
+            </IconButton>
+          </Toolbar>
+          hello
+        </Box>
       </Drawer>
     </div>
   );
