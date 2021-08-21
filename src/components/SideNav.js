@@ -1,53 +1,54 @@
 import {
+  Divider,
   Drawer,
   IconButton,
   makeStyles,
   Toolbar,
-  Box,
+  //  Box,
 } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import React from "react";
 import NavBar from "./NavBar";
+import DrawerItems from "./DrawerItems";
 
 const useStyles = makeStyles((themes) => ({
   msr: {
     width: 240,
+    backgroundColor: "rgb(25, 32, 43)",
+    color: "rgb(255, 220, 231)",
   },
 }));
 
 function SideNav() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const classes = useStyles();
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
+  const drawer = (
+    <Drawer
+      variant="persistent"
+      anchor="left"
+      open={open}
+      classes={{ paper: classes.msr }}
+    >
+      <Toolbar>
+        <IconButton onClick={toggleDrawer} edge="start" color="inherit">
+          <ArrowBackIosIcon />
+        </IconButton>
+      </Toolbar>
+      <Divider />
+      <DrawerItems />
+    </Drawer>
+  );
+
   return (
     <div>
       <NavBar onTap={toggleDrawer} open={open} setColor="secondary" />
 
-      <Drawer
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{ paper: classes.msr }}
-      >
-        <Box
-          sx={{
-            backgroundColor: "rgb(150,0,0)",
-            height: "100%",
-            width: "100%",
-          }}
-        >
-          <Toolbar>
-            <IconButton onClick={toggleDrawer} edge="start">
-              <CloseIcon />
-            </IconButton>
-          </Toolbar>
-          hello
-        </Box>
-      </Drawer>
+      {drawer}
     </div>
   );
 }
