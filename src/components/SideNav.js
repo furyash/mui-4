@@ -1,10 +1,11 @@
 import {
   Drawer,
+  Hidden,
   IconButton,
   makeStyles,
   Toolbar,
   //  Box,
-  //useMediaQuery,
+  useMediaQuery,
 } from "@material-ui/core";
 import React from "react";
 import NavBar from "./NavBar";
@@ -19,29 +20,35 @@ const useStyles = makeStyles((themes) => ({
 }));
 
 function SideNav() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
-  const drawer = (
-    <Drawer
-      variant="persistent"
-      anchor="left"
-      open={open}
-      classes={{ paper: classes.msr }}
-    >
-      <DrawerItems menuToggle={toggleDrawer} />
-    </Drawer>
-  );
-
   return (
     <div>
       <NavBar onTap={toggleDrawer} open={open} setColor="secondary" />
-
-      {drawer}
+      <Hidden smUp>
+        <Drawer
+          variant="temporary"
+          open={open}
+          onClose={toggleDrawer}
+          classes={{ paper: classes.msr }}
+        >
+          <DrawerItems menuToggle={toggleDrawer} />
+        </Drawer>
+      </Hidden>
+      <Hidden xsDown>
+        <Drawer
+          variant="persistent"
+          open={open}
+          classes={{ paper: classes.msr }}
+        >
+          <DrawerItems menuToggle={toggleDrawer} />
+        </Drawer>
+      </Hidden>
     </div>
   );
 }
