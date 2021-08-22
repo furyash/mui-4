@@ -1,12 +1,11 @@
 import {
-  Divider,
   Drawer,
   IconButton,
   makeStyles,
   Toolbar,
   //  Box,
+  //useMediaQuery,
 } from "@material-ui/core";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import React from "react";
 import NavBar from "./NavBar";
 import DrawerItems from "./DrawerItems";
@@ -34,13 +33,7 @@ function SideNav() {
       open={open}
       classes={{ paper: classes.msr }}
     >
-      <Toolbar>
-        <IconButton onClick={toggleDrawer} edge="start" color="inherit">
-          <ArrowBackIosIcon />
-        </IconButton>
-      </Toolbar>
-      <Divider />
-      <DrawerItems />
+      <DrawerItems menuToggle={toggleDrawer} />
     </Drawer>
   );
 

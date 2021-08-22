@@ -1,7 +1,9 @@
 import {
+  Toolbar,
   Divider,
   List,
   ListItem,
+  IconButton,
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
@@ -13,12 +15,19 @@ import PlaceIcon from "@material-ui/icons/Place";
 import HourglassFullIcon from "@material-ui/icons/HourglassFull";
 import StarIcon from "@material-ui/icons/Star";
 import LocalBarIcon from "@material-ui/icons/LocalBar";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
-function DrawerItems() {
+function DrawerItems(props) {
   let menuColor = "rgb(178, 0, 54)";
 
   return (
     <div>
+      <Toolbar>
+        <IconButton onClick={props.menuToggle} edge="start" color="inherit">
+          <ArrowBackIosIcon />
+        </IconButton>
+      </Toolbar>
+      <Divider />
       <List>
         <ListItem button>
           <ListItemIcon>
