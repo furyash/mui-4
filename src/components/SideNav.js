@@ -1,12 +1,4 @@
-import {
-  Drawer,
-  Hidden,
-  IconButton,
-  makeStyles,
-  Toolbar,
-  //  Box,
-  useMediaQuery,
-} from "@material-ui/core";
+import { Drawer, Hidden, makeStyles } from "@material-ui/core";
 import React from "react";
 import NavBar from "./NavBar";
 import DrawerItems from "./DrawerItems";
@@ -19,7 +11,7 @@ const useStyles = makeStyles((themes) => ({
   },
 }));
 
-function SideNav() {
+function SideNav(props) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
@@ -37,7 +29,12 @@ function SideNav() {
           onClose={toggleDrawer}
           classes={{ paper: classes.msr }}
         >
-          <DrawerItems menuToggle={toggleDrawer} />
+          <DrawerItems
+            menuToggle={() => {
+              toggleDrawer();
+              props.transition();
+            }}
+          />
         </Drawer>
       </Hidden>
       <Hidden xsDown>

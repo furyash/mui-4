@@ -1,13 +1,9 @@
 import MainDisplay from "./components/MainDisplay";
 //import NavBar from './components/NavBar';
-import SideNav from "./components/SideNav";
+//import SideNav from "./components/SideNav";
 
 function App() {
-  return (
-    <MainDisplay>
-      <SideNav />
-    </MainDisplay>
-  );
+  return <MainDisplay />;
 }
 
 export default App;

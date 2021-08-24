@@ -1,7 +1,10 @@
 import { Box } from "@material-ui/core";
 import Image from "../img/mainBack.jpg";
+import SideNav from "./SideNav";
 
 function MainDisplay(props) {
+  function transit() {}
+
   return (
     <Box
       sx={{
@@ -12,7 +15,7 @@ function MainDisplay(props) {
         height: "100%",
       }}
     >
-      {props.children}
+      <SideNav transition={transit} />
     </Box>
   );
 }
