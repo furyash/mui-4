@@ -28,7 +28,7 @@ function DrawerItems(props) {
         </IconButton>
       </Toolbar>
       <Divider />
-      <List>
+      <List disablePadding classes={{ root: { paddingLeft: 0 } }}>
         <ListItem button>
           <ListItemIcon>
             <FastForwardIcon style={{ color: menuColor }} />

@@ -17,6 +17,7 @@ function SideNav(props) {
 
   const toggleDrawer = () => {
     setOpen(!open);
+    props.transition();
   };
 
   return (
@@ -29,12 +30,7 @@ function SideNav(props) {
           onClose={toggleDrawer}
           classes={{ paper: classes.msr }}
         >
-          <DrawerItems
-            menuToggle={() => {
-              toggleDrawer();
-              props.transition();
-            }}
-          />
+          <DrawerItems menuToggle={toggleDrawer} />
         </Drawer>
       </Hidden>
       <Hidden xsDown>
