@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   drawerOpen: {
     [theme.breakpoints.up("sm")]: {
       //width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth - 50, //  transition glitch needs to be fixed (remove -50)
+      marginLeft: drawerWidth - 5, //  transition glitch needs to be fixed (remove -50)
       transition: theme.transitions.create(["margin"], {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
