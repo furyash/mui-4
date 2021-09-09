@@ -16,10 +16,25 @@ import {
 import FastForwardIcon from "@material-ui/icons/FastForward";
 
 function MainContent(props) {
-  const menuColor = "white";
+  const menuStyle = { color: "white" };
 
   let fontTheme = createTheme();
   fontTheme = responsiveFontSizes(fontTheme);
+
+  const setMenuItems = (icon, label) => {
+    return { icon: icon, label: label };
+  };
+
+  const menuItems = [
+    setMenuItems(<FastForwardIcon style={menuStyle} />, "Quick Items"),
+    setMenuItems(<FastForwardIcon style={menuStyle} />, "Order Items"),
+    setMenuItems(<FastForwardIcon style={menuStyle} />, "Full Menu"),
+    setMenuItems(<FastForwardIcon style={menuStyle} />, "Quantity Items"),
+    setMenuItems(<FastForwardIcon style={menuStyle} />, "Quality Items"),
+    setMenuItems(<FastForwardIcon style={menuStyle} />, "Menu by Time"),
+    setMenuItems(<FastForwardIcon style={menuStyle} />, "Menu by Olace"),
+    setMenuItems(<FastForwardIcon style={menuStyle} />, "Desert and Beverages"),
+  ];
 
   return (
     <Box
@@ -28,118 +43,60 @@ function MainContent(props) {
         ml: 1,
         p: 3,
         border: "1px solid white",
-        float: "right",
+        maxHeight: "80vh",
+        overflow: "auto",
+        scrollbarWidth: "none",
+        float: "right", // Added Leftside Gap of Cuisine Title
       }}
     >
-      <Grid container>
-        <Grid item xs={12} md={6} wrap="nowrap">
-          <ThemeProvider theme={fontTheme}>
-            <Typography variant="h1">Continental Cuisine</Typography>
-          </ThemeProvider>
+      <Grid container direction="column">
+        <Grid container justifyContent="flex-start" alignItems="flex-start">
+          <Grid item xs={12} md={6} wrap="nowrap">
+            <ThemeProvider theme={fontTheme}>
+              <Typography variant="h1">Continental Cuisine</Typography>
+            </ThemeProvider>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <List>
+              {menuItems.map((item) => {
+                return (
+                  <ListItem button>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.label} />
+                  </ListItem>
+                );
+              })}
+            </List>
+            <List>
+              {menuItems.map((item) => {
+                return (
+                  <ListItem button>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.label} />
+                  </ListItem>
+                );
+              })}
+            </List>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <List>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Quick Items" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Order Items" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Full Menu" />
-            </ListItem>
-          </List>
-          <List>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Quantity Items" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Quality Items" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Menu by Time" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Menu by Place" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Desert and Beverages" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Quick Items" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Order Items" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Full Menu" />
-            </ListItem>
-          </List>
-          <List>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Quantity Items" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Quality Items" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Menu by Time" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Menu by Place" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <FastForwardIcon style={{ color: menuColor }} />
-              </ListItemIcon>
-              <ListItemText primary="Desert and Beverages" />
-            </ListItem>
-          </List>
+        <Grid container>
+          <Grid item xs={12} md={6} wrap="nowrap">
+            <ThemeProvider theme={fontTheme}>
+              <Typography variant="h1">Continental Cuisine</Typography>
+            </ThemeProvider>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <List>
+              {menuItems.map((item) => {
+                return (
+                  <ListItem button>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.label} />
+                  </ListItem>
+                );
+              })}
+            </List>
+          </Grid>
         </Grid>
       </Grid>
     </Box>
