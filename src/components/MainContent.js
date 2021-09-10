@@ -14,6 +14,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 import FastForwardIcon from "@material-ui/icons/FastForward";
+import ItemSelector from "./ItemSelector";
 
 function MainContent(props) {
   const menuStyle = { color: "white" };
@@ -32,7 +33,7 @@ function MainContent(props) {
     setMenuItems(<FastForwardIcon style={menuStyle} />, "Quantity Items"),
     setMenuItems(<FastForwardIcon style={menuStyle} />, "Quality Items"),
     setMenuItems(<FastForwardIcon style={menuStyle} />, "Menu by Time"),
-    setMenuItems(<FastForwardIcon style={menuStyle} />, "Menu by Olace"),
+    setMenuItems(<FastForwardIcon style={menuStyle} />, "Menu by Place"),
     setMenuItems(<FastForwardIcon style={menuStyle} />, "Desert and Beverages"),
   ];
 
@@ -40,18 +41,19 @@ function MainContent(props) {
     <Box
       sx={{
         color: "white",
-        ml: 1,
+        ml: 2,
         p: 3,
         border: "1px solid white",
         maxHeight: "80vh",
         overflow: "auto",
         scrollbarWidth: "none",
-        float: "right", // Added Leftside Gap of Cuisine Title
+        //float: "right", // Added Leftside Gap of Cuisine Title
       }}
     >
       <Grid container direction="column">
         <Grid container justifyContent="flex-start" alignItems="flex-start">
           <Grid item xs={12} md={6} wrap="nowrap">
+            {/* There is a glitch on wrapping, press sidebarmenu fixes it*/}
             <ThemeProvider theme={fontTheme}>
               <Typography variant="h1">Continental Cuisine</Typography>
             </ThemeProvider>
@@ -60,10 +62,7 @@ function MainContent(props) {
             <List>
               {menuItems.map((item) => {
                 return (
-                  <ListItem button>
-                    <ListItemIcon>{item.icon}</ListItemIcon>
-                    <ListItemText primary={item.label} />
-                  </ListItem>
+                  <ItemSelector label={item.label} textTheme={fontTheme} />
                 );
               })}
             </List>

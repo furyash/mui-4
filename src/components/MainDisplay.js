@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
   drawerOpen: {
     [theme.breakpoints.up("sm")]: {
       //width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth - 5, //  transition glitch needs to be fixed (remove -50)
+      marginLeft: drawerWidth - 10, //  transition glitch needs to be fixed (remove -50)
       transition: theme.transitions.create(["margin"], {
         easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
+        duration: "150ms",
       }),
     },
   },
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       transition: theme.transitions.create(["margin"], {
         easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
+        duration: "150ms",
       }),
     },
   },
