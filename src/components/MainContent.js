@@ -4,17 +4,15 @@ import {
   Grid,
   Typography,
   List,
-  ListItemIcon,
-  ListItemText,
   ListItem,
   createTheme,
   responsiveFontSizes,
   ThemeProvider,
 } from "@material-ui/core";
-import FastForwardIcon from "@material-ui/icons/FastForward";
+import ItemSelector from "./ItemSelector";
 
 function MainContent(props) {
-  const menuStyle = { color: "white" };
+  //const menuStyle = { color: "white" };
 
   let fontTheme = createTheme();
   fontTheme = responsiveFontSizes(fontTheme);
@@ -26,7 +24,7 @@ function MainContent(props) {
     "Quantity Items",
     "Quality Items",
     "Menu by Time",
-    "Menu by Olace",
+    "Menu by Place",
     "Desert and Beverages",
   ];
 
@@ -34,18 +32,19 @@ function MainContent(props) {
     <Box
       sx={{
         color: "white",
-        ml: 1,
+        ml: 2,
         p: 3,
         border: "1px solid white",
         maxHeight: "80vh",
         overflow: "auto",
         scrollbarWidth: "none",
-        float: "right", // Added Leftside Gap of Cuisine Title
+        //float: "right", // Added Leftside Gap of Cuisine Title
       }}
     >
       <Grid container direction="column">
         <Grid container justifyContent="flex-start" alignItems="flex-start">
-          <Grid item xs={12} md={6} wrap="nowrap">
+          <Grid item xs={12} md={6}>
+            {/* There is a glitch on wrapping, press sidebarmenu fixes it*/}
             <ThemeProvider theme={fontTheme}>
               <Typography variant="h1">Continental Cuisine</Typography>
             </ThemeProvider>
@@ -53,12 +52,12 @@ function MainContent(props) {
           <Grid item xs={12} md={6}>
             <List>
               {menuItems.map((item) => {
-                return <ListItem button></ListItem>;
+                return <ItemSelector label={item} textTheme={fontTheme} />;
               })}
             </List>
             <List>
               {menuItems.map((item) => {
-                return <ListItem button></ListItem>;
+                return <ListItem button>{item}</ListItem>;
               })}
             </List>
           </Grid>
@@ -72,7 +71,7 @@ function MainContent(props) {
           <Grid item xs={12} md={6}>
             <List>
               {menuItems.map((item) => {
-                return <ListItem button></ListItem>;
+                return <ListItem button>{item}</ListItem>;
               })}
             </List>
           </Grid>
