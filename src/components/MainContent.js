@@ -34,7 +34,7 @@ function MainContent(props) {
         color: "white",
         ml: 2,
         p: 3,
-        border: "1px solid white",
+        //border: "1px solid white",
         maxHeight: "80vh",
         overflow: "auto",
         scrollbarWidth: "none",
@@ -51,12 +51,18 @@ function MainContent(props) {
           </Grid>
           <Grid item xs={12} md={6}>
             <List>
-              {menuItems.map((item) => {
-                return <ItemSelector label={item} textTheme={fontTheme} />;
+              {menuItems.map((item, index) => {
+                return (
+                  <ItemSelector
+                    key={index}
+                    label={item}
+                    textTheme={fontTheme}
+                  />
+                );
               })}
             </List>
             <List>
-              {menuItems.map((item) => {
+              {menuItems.map((item, index) => {
                 return <ListItem button>{item}</ListItem>;
               })}
             </List>
@@ -70,7 +76,7 @@ function MainContent(props) {
           </Grid>
           <Grid item xs={12} md={6}>
             <List>
-              {menuItems.map((item) => {
+              {menuItems.map((item, index) => {
                 return <ListItem button>{item}</ListItem>;
               })}
             </List>
