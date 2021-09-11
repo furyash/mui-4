@@ -1,9 +1,7 @@
 import React from "react";
-import clsx from "clsx";
 import {
   Box,
   Grid,
-  makeStyles,
   Typography,
   List,
   ListItemIcon,
@@ -21,19 +19,15 @@ function MainContent(props) {
   let fontTheme = createTheme();
   fontTheme = responsiveFontSizes(fontTheme);
 
-  const setMenuItems = (icon, label) => {
-    return { icon: icon, label: label };
-  };
-
   const menuItems = [
-    setMenuItems(<FastForwardIcon style={menuStyle} />, "Quick Items"),
-    setMenuItems(<FastForwardIcon style={menuStyle} />, "Order Items"),
-    setMenuItems(<FastForwardIcon style={menuStyle} />, "Full Menu"),
-    setMenuItems(<FastForwardIcon style={menuStyle} />, "Quantity Items"),
-    setMenuItems(<FastForwardIcon style={menuStyle} />, "Quality Items"),
-    setMenuItems(<FastForwardIcon style={menuStyle} />, "Menu by Time"),
-    setMenuItems(<FastForwardIcon style={menuStyle} />, "Menu by Olace"),
-    setMenuItems(<FastForwardIcon style={menuStyle} />, "Desert and Beverages"),
+    "Quick Items",
+    "Order Items",
+    "Full Menu",
+    "Quantity Items",
+    "Quality Items",
+    "Menu by Time",
+    "Menu by Olace",
+    "Desert and Beverages",
   ];
 
   return (
@@ -59,22 +53,12 @@ function MainContent(props) {
           <Grid item xs={12} md={6}>
             <List>
               {menuItems.map((item) => {
-                return (
-                  <ListItem button>
-                    <ListItemIcon>{item.icon}</ListItemIcon>
-                    <ListItemText primary={item.label} />
-                  </ListItem>
-                );
+                return <ListItem button></ListItem>;
               })}
             </List>
             <List>
               {menuItems.map((item) => {
-                return (
-                  <ListItem button>
-                    <ListItemIcon>{item.icon}</ListItemIcon>
-                    <ListItemText primary={item.label} />
-                  </ListItem>
-                );
+                return <ListItem button></ListItem>;
               })}
             </List>
           </Grid>
@@ -88,12 +72,7 @@ function MainContent(props) {
           <Grid item xs={12} md={6}>
             <List>
               {menuItems.map((item) => {
-                return (
-                  <ListItem button>
-                    <ListItemIcon>{item.icon}</ListItemIcon>
-                    <ListItemText primary={item.label} />
-                  </ListItem>
-                );
+                return <ListItem button></ListItem>;
               })}
             </List>
           </Grid>
