@@ -46,7 +46,15 @@ function MainContent(props) {
           <Grid item xs={12} md={6}>
             {/* There is a glitch on wrapping, press sidebarmenu fixes it*/}
             <ThemeProvider theme={fontTheme}>
-              <Typography variant="h1">Continental Cuisine</Typography>
+              <Typography
+                style={{
+                  textAlign: "right",
+                  textShadow: "5px 5px 5px black",
+                }}
+                variant="h1"
+              >
+                Continental Cuisine
+              </Typography>
             </ThemeProvider>
           </Grid>
           <Grid item xs={12} md={6}>

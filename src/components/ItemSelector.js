@@ -12,7 +12,7 @@ import {
 import React from "react";
 import clsx from "clsx";
 
-const useStyles = makeStyles((themes) => ({
+const useStyles = makeStyles((theme) => ({
   selector: {
     borderRight: "4px solid rgb(178, 0, 54)",
     backgroundColor: "rgba(25, 32, 43, 0.596)",
@@ -26,6 +26,18 @@ const useStyles = makeStyles((themes) => ({
     color: "white",
   },
   hide: { display: "none" },
+  incrementorOpen: {
+    transition: theme.transitions.create(["all"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: "500ms",
+    }),
+  },
+  incrementorClose: {
+    transition: theme.transitions.create(["all"], {
+      easing: theme.transitions.easing.sharp,
+      duration: "500ms",
+    }),
+  },
 }));
 
 function ItemSelector(props) {
@@ -40,7 +52,12 @@ function ItemSelector(props) {
   return (
     <div style={{ margin: 0, padding: 0 }}>
       <ListItem>
-        <Paper elevation={3} className={classes.selector}>
+        <Paper
+          elevation={3}
+          className={clsx(classes.selector, classes.incrementorOpen, {
+            [classes.incrementorClose]: !counter,
+          })}
+        >
           <ListItem button onClick={handleIncrement}>
             <ListItemText>
               <ThemeProvider theme={textTheme}>
