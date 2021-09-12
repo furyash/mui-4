@@ -10,9 +10,32 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 import ItemSelector from "./ItemSelector";
+// database : https://mui-4-f408f-default-rtdb.firebaseio.com/allItems
 
 function MainContent(props) {
   //const menuStyle = { color: "white" };
+
+  const [mainMenu, setMainMenu] = React.useState([]);
+  const [subMenu, setSubMenu] = React.useState([]);
+  const [allItems, setAllItems] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/allItems.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setAllItems(data);
+      });
+    fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/subMenu.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setSubMenu(data);
+      });
+    fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/mainMenu.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setMainMenu(data);
+      });
+  }, []);
 
   let fontTheme = createTheme();
   fontTheme = responsiveFontSizes(fontTheme);
@@ -48,8 +71,8 @@ function MainContent(props) {
             <ThemeProvider theme={fontTheme}>
               <Typography
                 style={{
-                  textAlign: "right",
-                  textShadow: "5px 5px 5px black",
+                  textAlign: "center",
+                  textShadow: "3px 3px 5px #f50057",
                 }}
                 variant="h1"
               >
