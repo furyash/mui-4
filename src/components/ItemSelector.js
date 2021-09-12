@@ -1,36 +1,80 @@
 import {
+  Button,
   ButtonGroup,
+  Grid,
   ListItem,
   ListItemText,
   Paper,
   ThemeProvider,
   Typography,
+  makeStyles,
 } from "@material-ui/core";
 import React from "react";
+import clsx from "clsx";
+
+const useStyles = makeStyles((themes) => ({
+  selector: {
+    borderRight: "4px solid rgb(178, 0, 54)",
+    backgroundColor: "rgba(25, 32, 43, 0.596)",
+    color: "white",
+    flexGrow: 1,
+  },
+  incrementor: {
+    //border: "1px solid white",
+    marginLeft: 15,
+    backgroundColor: "inherit",
+    color: "white",
+  },
+  hide: { display: "none" },
+}));
 
 function ItemSelector(props) {
+  const classes = useStyles();
   const { key, label, textTheme } = props;
+
+  const [counter, setCounter] = React.useState(0);
+
+  const handleIncrement = () => setCounter(counter + 1);
+  const handleDecrement = () => setCounter(counter - 1);
+
   return (
     <div style={{ margin: 0, padding: 0 }}>
-      <Paper
-        elevation={3}
-        style={{
-          borderRight: "4px solid rgb(178, 0, 54)",
-
-          //borderLeft: "1px solid rgb(178, 0, 54)",
-          backgroundColor: "rgba(25, 32, 43, 0.596)",
-          color: "white",
-        }}
-      >
-        <ListItem button onClick>
-          <ListItemText style={{ textAlign: "right", margin: 0, padding: 0 }}>
-            <ThemeProvider theme={textTheme}>
-              <Typography variant="h4">{label}</Typography>
-            </ThemeProvider>
-          </ListItemText>
-        </ListItem>
-      </Paper>
-      <ButtonGroup></ButtonGroup>
+      <ListItem>
+        <Paper elevation={3} className={classes.selector}>
+          <ListItem button onClick={handleIncrement}>
+            <ListItemText>
+              <ThemeProvider theme={textTheme}>
+                <Typography style={{ textAlign: "right" }} variant="h4">
+                  {label}
+                </Typography>
+              </ThemeProvider>
+            </ListItemText>
+          </ListItem>
+        </Paper>
+        <div
+          className={clsx(classes.incrementor, { [classes.hide]: !counter })}
+        >
+          <ButtonGroup variant="contained" color="secondary" size="small">
+            <Button onClick={handleDecrement}>
+              <ThemeProvider theme={textTheme}>
+                <Typography variant="h6">-</Typography>
+              </ThemeProvider>
+            </Button>
+            <Button disabled>
+              <ThemeProvider theme={textTheme}>
+                <Typography variant="h6" style={{ color: "#f50057" }}>
+                  {counter}
+                </Typography>
+              </ThemeProvider>
+            </Button>
+            <Button onClick={handleIncrement}>
+              <ThemeProvider theme={textTheme}>
+                <Typography variant="h6">+</Typography>
+              </ThemeProvider>
+            </Button>
+          </ButtonGroup>
+        </div>
+      </ListItem>
     </div>
   );
 }

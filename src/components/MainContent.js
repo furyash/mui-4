@@ -50,17 +50,11 @@ function MainContent(props) {
             </ThemeProvider>
           </Grid>
           <Grid item xs={12} md={6}>
-            <List>
-              {menuItems.map((item, index) => {
-                return (
-                  <ItemSelector
-                    key={index}
-                    label={item}
-                    textTheme={fontTheme}
-                  />
-                );
-              })}
-            </List>
+            {menuItems.map((item, index) => {
+              return (
+                <ItemSelector key={index} label={item} textTheme={fontTheme} />
+              );
+            })}
             <List>
               {menuItems.map((item, index) => {
                 return <ListItem button>{item}</ListItem>;
