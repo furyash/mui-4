@@ -41,12 +41,11 @@ const useStyles = makeStyles((theme) => ({
 
 function ItemSelector(props) {
   const classes = useStyles();
-  const { label, textTheme } = props;
+  const { itemId, label, textTheme, orderQuantity, incrementor, decrementor } =
+    props;
 
-  const [counter, setCounter] = React.useState(0);
-
-  const handleIncrement = () => setCounter(counter + 1);
-  const handleDecrement = () => setCounter(counter - 1);
+  let counter = orderQuantity;
+  console.log(itemId);
 
   return (
     <div style={{ margin: 0, padding: 0 }}>
@@ -57,7 +56,7 @@ function ItemSelector(props) {
             [classes.incrementorClose]: !counter,
           })}
         >
-          <ListItem button onClick={handleIncrement}>
+          <ListItem button onClick={incrementor}>
             <ListItemText>
               <ThemeProvider theme={textTheme}>
                 <Typography style={{ textAlign: "right" }} variant="h5">
@@ -71,7 +70,7 @@ function ItemSelector(props) {
           className={clsx(classes.incrementor, { [classes.hide]: !counter })}
         >
           <ButtonGroup variant="contained" color="secondary" size="small">
-            <Button onClick={handleDecrement}>
+            <Button onClick={incrementor}>
               <ThemeProvider theme={textTheme}>
                 <Typography variant="h6">-</Typography>
               </ThemeProvider>
@@ -83,7 +82,7 @@ function ItemSelector(props) {
                 </Typography>
               </ThemeProvider>
             </Button>
-            <Button onClick={handleIncrement}>
+            <Button onClick={decrementor}>
               <ThemeProvider theme={textTheme}>
                 <Typography variant="h6">+</Typography>
               </ThemeProvider>

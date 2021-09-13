@@ -9,6 +9,8 @@ import {
   Divider,
 } from "@material-ui/core";
 import ItemSelector from "./ItemSelector";
+import OrderContext from "../store/orderContext";
+
 // database : https://mui-4-f408f-default-rtdb.firebaseio.com/allItems
 
 function MainContent(props) {
@@ -16,12 +18,25 @@ function MainContent(props) {
   const [subMenu, setSubMenu] = React.useState([]);
   const [allItems, setAllItems] = React.useState([]);
 
+  const orderItems = React.useContext(OrderContext);
+  const idList = orderItems.items;
+
+  const getQuantity = (id) => {
+    return idList.find((item) => {
+      if (item.id === id) return item.quantity;
+      else return 0;
+    });
+  };
+
   React.useEffect(() => {
     fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/allItems.json")
       .then((response) => response.json())
       .then((data) => {
         setAllItems(data);
       });
+  }, []);
+
+  React.useEffect(() => {
     fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/subMenu.json")
       .then((response) => response.json())
       .then((data) => {
@@ -79,7 +94,14 @@ function MainContent(props) {
                     );
                     if (itemFound)
                       return (
-                        <ItemSelector label={item.name} textTheme={fontTheme} />
+                        <ItemSelector
+                          itemId={item.id}
+                          label={item.name}
+                          textTheme={fontTheme}
+                          orderQuantity={getQuantity(item.id)}
+                          incrementor={orderItems.increaseQuantity(item.id)}
+                          decrementor={orderItems.decreaseQuantity(item.id)}
+                        />
                       );
                     return null;
                   })}
