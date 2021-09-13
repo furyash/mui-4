@@ -1,6 +1,8 @@
 import { Box, makeStyles } from "@material-ui/core";
 import clsx from "clsx";
 import React from "react";
+import { Route, Switch } from "react-router-dom";
+
 import Image from "../img/mainBack.jpg";
 import MainContent from "./MainContent";
 import SideNav from "./SideNav";
@@ -37,6 +39,15 @@ const useStyles = makeStyles((theme) => ({
 function MainDisplay(props) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
+  const [mainMenu, setMainMenu] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/mainMenu.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setMainMenu(data);
+      });
+  }, []);
 
   function transit() {
     setOpen(!open);
@@ -48,8 +59,19 @@ function MainDisplay(props) {
         [classes.drawerOpen]: open,
       })}
     >
-      <SideNav transition={transit} />
-      <MainContent />
+      <SideNav transition={transit} />{" "}
+      <Switch>
+        {mainMenu.map((menu) => {
+          return (
+            <Route path={menu.path} exact>
+              <MainContent menuId={menu.id} />
+            </Route>
+          );
+        })}
+        <Route path="/order" exact>
+          <MainContent />
+        </Route>
+      </Switch>
     </Box>
   );
 }

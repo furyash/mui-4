@@ -1,7 +1,6 @@
 import {
   Button,
   ButtonGroup,
-  Grid,
   ListItem,
   ListItemText,
   Paper,
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ItemSelector(props) {
   const classes = useStyles();
-  const { key, label, textTheme } = props;
+  const { label, textTheme } = props;
 
   const [counter, setCounter] = React.useState(0);
 
