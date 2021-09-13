@@ -60,7 +60,7 @@ function ItemSelector(props) {
           <ListItem button onClick={handleIncrement}>
             <ListItemText>
               <ThemeProvider theme={textTheme}>
-                <Typography style={{ textAlign: "right" }} variant="h4">
+                <Typography style={{ textAlign: "right" }} variant="h5">
                   {label}
                 </Typography>
               </ThemeProvider>

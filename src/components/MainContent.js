@@ -66,7 +66,7 @@ function MainContent(props) {
                         marginRight: 20,
                         textShadow: "3px 3px 5px #f50057",
                       }}
-                      variant="h1"
+                      variant="h2"
                     >
                       {subMenuItem.name}
                     </Typography>
@@ -81,6 +81,7 @@ function MainContent(props) {
                       return (
                         <ItemSelector label={item.name} textTheme={fontTheme} />
                       );
+                    return null;
                   })}
                   <Divider
                     variant="middle"
@@ -90,6 +91,7 @@ function MainContent(props) {
               </Grid>
             );
           }
+          return null;
         })}
       </Grid>
     </Box>

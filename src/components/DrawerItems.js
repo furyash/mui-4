@@ -37,6 +37,7 @@ function DrawerItems(props) {
       if (menu.name === ev.target.innerHTML) {
         history.push(menu.path);
       }
+      return null;
     });
   };
 
