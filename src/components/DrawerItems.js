@@ -8,6 +8,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
+import MenuContext from "../store/menuContext";
 import { useHistory } from "react-router-dom";
 
 import ListIcon from "@material-ui/icons/List";
@@ -22,16 +23,25 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 function DrawerItems(props) {
   let menuColor = "rgb(178, 0, 54)";
   const [mainMenu, setMainMenu] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
   const history = useHistory();
 
-  React.useEffect(() => {
-    fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/mainMenu.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setMainMenu(data);
-      });
-  }, []);
+  let menuSet = React.useContext(MenuContext);
 
+  React.useEffect(() => {
+    if (menuSet && menuSet.menu) {
+      setMainMenu(menuSet.menu);
+      setIsLoading(false);
+    }
+  }, [menuSet]);
+
+  if (isLoading) {
+    return (
+      <div>
+        <h3>Loading</h3>
+      </div>
+    );
+  }
   const handleRoute = (ev) => {
     mainMenu.map((menu) => {
       if (menu.name === ev.target.innerHTML) {

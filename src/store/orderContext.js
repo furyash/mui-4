@@ -8,7 +8,10 @@ const OrderContext = createContext({
 
 export function OrderContextProvider(props) {
   const [orderItems, setOrderItems] = React.useState([]);
-  setOrderItems([{ id: 0, quantity: 0 }]);
+
+  React.useEffect(() => {
+    setOrderItems([{ id: 0, quantity: 0 }]);
+  }, []);
 
   function incrementItemHandler(itemId) {
     setOrderItems((prevOrderItems) => {

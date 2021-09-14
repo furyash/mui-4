@@ -1,8 +1,44 @@
+import React from "react";
 import MainDisplay from "./components/MainDisplay";
-//import NavBar from './components/NavBar';
+//import { MenuContextProvider } from "./store/menuContext";
+import { OrderContextProvider } from "./store/orderContext";
+import MenuContext from "./store/menuContext";
 
 function App() {
-  return <MainDisplay />;
+  const menuSet = React.useContext(MenuContext);
+
+  const [menu, setMenu] = React.useState([]);
+  const [subMenu, setSubMenu] = React.useState([]);
+  const [allItems, setAllItems] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/allItems.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setAllItems(data);
+      });
+    fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/subMenu.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setSubMenu(data);
+      });
+    fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/mainMenu.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setMenu(data);
+      });
+  }, []);
+
+  React.useEffect(() => {
+    if (menu.length && subMenu.length && allItems.length)
+      menuSet.setMenuSet(menu, subMenu, allItems);
+  }, [menu, subMenu, allItems]);
+
+  return (
+    <OrderContextProvider>
+      <MainDisplay />
+    </OrderContextProvider>
+  );
 }
 
 export default App;

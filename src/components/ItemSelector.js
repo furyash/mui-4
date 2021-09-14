@@ -45,7 +45,6 @@ function ItemSelector(props) {
     props;
 
   let counter = orderQuantity;
-  console.log(itemId);
 
   return (
     <div style={{ margin: 0, padding: 0 }}>

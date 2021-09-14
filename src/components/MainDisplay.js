@@ -7,6 +7,8 @@ import Image from "../img/mainBack.jpg";
 import MainContent from "./MainContent";
 import SideNav from "./SideNav";
 
+import MenuContext from "../store/menuContext";
+
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -40,14 +42,24 @@ function MainDisplay(props) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
   const [mainMenu, setMainMenu] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  let menuSet = React.useContext(MenuContext);
 
   React.useEffect(() => {
-    fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/mainMenu.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setMainMenu(data);
-      });
-  }, []);
+    if (menuSet && menuSet.menu) {
+      setMainMenu(menuSet.menu);
+      setIsLoading(false);
+    }
+  }, [menuSet]);
+
+  if (isLoading) {
+    return (
+      <div>
+        <h3>Loading</h3>
+      </div>
+    );
+  }
 
   function transit() {
     setOpen(!open);
@@ -59,6 +71,7 @@ function MainDisplay(props) {
         [classes.drawerOpen]: open,
       })}
     >
+      {console.log(menuSet.menu)}
       <SideNav transition={transit} />{" "}
       <Switch>
         {mainMenu.map((menu) => {
