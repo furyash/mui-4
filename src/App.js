@@ -10,6 +10,7 @@ function App() {
   const [menu, setMenu] = React.useState([]);
   const [subMenu, setSubMenu] = React.useState([]);
   const [allItems, setAllItems] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
     fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/allItems.json")
@@ -30,9 +31,19 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    if (menu.length && subMenu.length && allItems.length)
+    if (menu.length && subMenu.length && allItems.length) {
       menuSet.setMenuSet(menu, subMenu, allItems);
+      setIsLoading(false);
+    }
   }, [menu, subMenu, allItems]);
+
+  if (isLoading) {
+    return (
+      <div style={{ color: "white" }}>
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
 
   return (
     <OrderContextProvider>

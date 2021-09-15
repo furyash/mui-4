@@ -10,17 +10,21 @@ import {
 } from "@material-ui/core";
 import ItemSelector from "./ItemSelector";
 import MenuContext from "../store/menuContext";
-//import OrderContext from "../store/orderContext";
-
-// database : https://mui-4-f408f-default-rtdb.firebaseio.com/allItems
+import OrderContext from "../store/orderContext";
 
 function MainContent(props) {
   //const menuStyle = { color: "white" };
+  let fontTheme = createTheme();
+  fontTheme = responsiveFontSizes(fontTheme);
+
+  const menuSet = React.useContext(MenuContext);
+  const orderItems = React.useContext(OrderContext);
+  const itemList = orderItems.items;
+
   const [subMenu, setSubMenu] = React.useState([]);
   const [allItems, setAllItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-
-  let menuSet = React.useContext(MenuContext);
+  const [refresh, setRefresh] = React.useState(true);
 
   React.useEffect(() => {
     if (menuSet && menuSet.menu) {
@@ -32,25 +36,20 @@ function MainContent(props) {
 
   if (isLoading) {
     return (
-      <div>
-        <h3>Loading</h3>
+      <div style={{ color: "white" }}>
+        <h1>Loading...</h1>
       </div>
     );
   }
 
-  //const orderItems = React.useContext(OrderContext);
-  //const itemList = orderItems.items;
-
-  /*const getQuantity = (id) => {
-    return itemList.find((item) => {
-      if (item.id === id) return item.quantity;
+  let getQuantity = (id) => {
+    if (itemList) {
+      let getIndex = itemList.findIndex((item) => item.id === id);
+      if (getIndex >= 0) return itemList[getIndex].quantity;
       else return 0;
-    });
+    }
+    return 0;
   };
-  */
-
-  let fontTheme = createTheme();
-  fontTheme = responsiveFontSizes(fontTheme);
 
   return (
     <Box
@@ -100,12 +99,18 @@ function MainContent(props) {
                     if (itemFound)
                       return (
                         <ItemSelector
-                          itemId={item.id}
+                          key={item.id}
                           label={item.name}
                           textTheme={fontTheme}
-                          //orderQuantity={getQuantity(item.id)}
-                          //incrementor={orderItems.increaseQuantity(item.id)}
-                          //decrementor={orderItems.decreaseQuantity(item.id)}
+                          orderQuantity={getQuantity(item.id)}
+                          incrementor={() => {
+                            orderItems.increaseQuantity(item.id);
+                            setRefresh(!refresh);
+                          }}
+                          decrementor={() => {
+                            orderItems.decreaseQuantity(item.id);
+                            setRefresh(!refresh);
+                          }}
                         />
                       );
                     return null;

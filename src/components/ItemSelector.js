@@ -41,8 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ItemSelector(props) {
   const classes = useStyles();
-  const { itemId, label, textTheme, orderQuantity, incrementor, decrementor } =
-    props;
+  const { label, textTheme, orderQuantity, incrementor, decrementor } = props;
 
   let counter = orderQuantity;
 
@@ -69,7 +68,7 @@ function ItemSelector(props) {
           className={clsx(classes.incrementor, { [classes.hide]: !counter })}
         >
           <ButtonGroup variant="contained" color="secondary" size="small">
-            <Button onClick={incrementor}>
+            <Button onClick={decrementor}>
               <ThemeProvider theme={textTheme}>
                 <Typography variant="h6">-</Typography>
               </ThemeProvider>
@@ -81,7 +80,7 @@ function ItemSelector(props) {
                 </Typography>
               </ThemeProvider>
             </Button>
-            <Button onClick={decrementor}>
+            <Button onClick={incrementor}>
               <ThemeProvider theme={textTheme}>
                 <Typography variant="h6">+</Typography>
               </ThemeProvider>

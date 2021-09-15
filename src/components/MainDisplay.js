@@ -55,8 +55,8 @@ function MainDisplay(props) {
 
   if (isLoading) {
     return (
-      <div>
-        <h3>Loading</h3>
+      <div style={{ color: "white" }}>
+        <h1>Loading...</h1>
       </div>
     );
   }
@@ -71,7 +71,6 @@ function MainDisplay(props) {
         [classes.drawerOpen]: open,
       })}
     >
-      {console.log(menuSet.menu)}
       <SideNav transition={transit} />{" "}
       <Switch>
         {mainMenu.map((menu) => {

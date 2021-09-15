@@ -37,8 +37,8 @@ function DrawerItems(props) {
 
   if (isLoading) {
     return (
-      <div>
-        <h3>Loading</h3>
+      <div style={{ color: "white" }}>
+        <h1>Loading...</h1>
       </div>
     );
   }
