@@ -1,48 +1,66 @@
 import React from "react";
-import InnerInnerApp from "./test2";
-import MenuContext, { MenuContextProvider } from "./store/menuContext";
+import { Box, Grid, Paper } from "@material-ui/core";
 
-function App() {
+export default function App() {
   return (
-    <MenuContextProvider>
-      <InnerApp />
-      <InnerInnerApp />
-    </MenuContextProvider>
+    <Box style={{ border: "1px solid white", color: "white" }}>
+      <Grid container direction="row">
+        <Box
+          style={{
+            border: "1px solid white",
+            color: "white",
+            maxHeight: "80vh",
+            overflow: "auto",
+            flexFlow: "column",
+          }}
+          order={{ xs: 2 }}
+        >
+          <Grid item xs={6}>
+            <ul>
+              <li>Menu Item</li>
+              <li>Menu Item</li>
+              <li>Menu Item</li>
+              <li>Menu Item</li>
+              <li>Menu Item</li>
+              <li>Menu Item</li>
+              <li>Menu Item</li>
+              <li>Menu Item</li>
+              <li>Menu Item</li>
+              <li>Menu Item</li>
+              <li>Menu Item</li>
+              <li>Menu Item</li>
+              <li>Menu Item</li>
+              <li>Menu Item</li>
+            </ul>
+          </Grid>
+        </Box>
+
+        <Box
+          order={{ xs: 1 }}
+          style={{
+            maxHeight: "10vh",
+            border: "1px solid white",
+            color: "white",
+          }}
+        >
+          <Grid item xs={6}>
+            <h2>Order Items</h2>
+          </Grid>
+        </Box>
+
+        <Box
+          order={{ xs: 1 }}
+          style={{
+            maxHeight: "10vh",
+            border: "1px solid white",
+            color: "white",
+          }}
+        >
+          <Grid item xs={6}>
+            <h2>Place Order</h2>
+          </Grid>
+        </Box>
+      </Grid>
+    </Box>
   );
 }
-
-export function InnerApp() {
-  const menuSet = React.useContext(MenuContext);
-
-  const [menu, setMenu] = React.useState([]);
-  const [subMenu, setSubMenu] = React.useState([]);
-  const [allItems, setAllItems] = React.useState([]);
-
-  React.useEffect(() => {
-    fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/allItems.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setAllItems(data);
-      });
-    fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/subMenu.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setSubMenu(data);
-      });
-    fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/mainMenu.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setMenu(data);
-      });
-  }, []);
-
-  React.useEffect(() => {
-    if (menu.length && subMenu.length && allItems.length)
-      menuSet.setMenuSet(menu, subMenu, allItems);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [menu, subMenu, allItems]);
-
-  return <div />;
-}
-
-export default App;

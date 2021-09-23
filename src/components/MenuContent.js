@@ -12,7 +12,7 @@ import ItemSelector from "./ItemSelector";
 import MenuContext from "../store/menuContext";
 import OrderContext from "../store/orderContext";
 
-function MainContent(props) {
+function MenuContent(props) {
   //const menuStyle = { color: "white" };
   let fontTheme = createTheme();
   fontTheme = responsiveFontSizes(fontTheme);
@@ -24,7 +24,7 @@ function MainContent(props) {
   const [subMenu, setSubMenu] = React.useState([]);
   const [allItems, setAllItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [refresh, setRefresh] = React.useState(true);
+  //const [refresh, setRefresh] = React.useState(true);
 
   React.useEffect(() => {
     if (menuSet && menuSet.menu) {
@@ -71,12 +71,8 @@ function MainContent(props) {
           ); //Using 1 for showing Quick Items Menu
           if (menuFound) {
             return (
-              <Grid
-                container
-                justifyContent="flex-start"
-                alignItems="flex-start"
-              >
-                <Grid item xs={12} md={6}>
+              <Grid container justifyContent="center">
+                <Grid item xs={12} md={6} lg={5}>
                   {/* There is a glitch on wrapping, press sidebarmenu fixes it*/}
                   <ThemeProvider theme={fontTheme}>
                     <Typography
@@ -85,13 +81,13 @@ function MainContent(props) {
                         marginRight: 20,
                         textShadow: "3px 3px 5px #f50057",
                       }}
-                      variant="h2"
+                      variant="h1"
                     >
                       {subMenuItem.name}
                     </Typography>
                   </ThemeProvider>
                 </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} sm={10} md={6} lg={5}>
                   {allItems.map((item) => {
                     var itemFound = item["submenu-id"].find(
                       (subMenuId) => subMenuId === subMenuItem.id
@@ -105,11 +101,11 @@ function MainContent(props) {
                           orderQuantity={getQuantity(item.id)}
                           incrementor={() => {
                             orderItems.increaseQuantity(item.id);
-                            setRefresh(!refresh);
+                            //setRefresh(!refresh);
                           }}
                           decrementor={() => {
                             orderItems.decreaseQuantity(item.id);
-                            setRefresh(!refresh);
+                            //setRefresh(!refresh);
                           }}
                         />
                       );
@@ -130,4 +126,4 @@ function MainContent(props) {
   );
 }
 
-export default MainContent;
+export default MenuContent;

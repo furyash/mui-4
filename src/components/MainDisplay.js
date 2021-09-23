@@ -4,10 +4,11 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Image from "../img/mainBack.jpg";
-import MainContent from "./MainContent";
+import MenuContent from "./MenuContent";
 import SideNav from "./SideNav";
 
 import MenuContext from "../store/menuContext";
+import OrderContent from "./OrderContent";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -71,18 +72,25 @@ function MainDisplay(props) {
         [classes.drawerOpen]: open,
       })}
     >
-      <SideNav transition={transit} />{" "}
+      <SideNav transition={transit} />
       <Switch>
         {mainMenu.map((menu) => {
-          return (
-            <Route path={menu.path} exact>
-              <MainContent menuId={menu.id} />
-            </Route>
-          );
+          if (menu.id !== 7)
+            return (
+              <Route path={menu.path} exact>
+                <MenuContent menuId={menu.id} />
+              </Route>
+            );
+          else
+            return (
+              <Route path={menu.path} exact>
+                <OrderContent />
+              </Route>
+            );
         })}
-        <Route path="/order" exact>
-          <MainContent />
-        </Route>
+        {/* <Route path="/order" exact>
+          <MainContent menuId={1} />
+        </Route> */}
       </Switch>
     </Box>
   );
