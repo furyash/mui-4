@@ -4,6 +4,7 @@ const OrderContext = createContext({
   items: [],
   increaseQuantity: (itemId) => {},
   decreaseQuantity: (itemId) => {},
+  reset: () => {},
 });
 
 export function OrderContextProvider(props) {
@@ -32,10 +33,14 @@ export function OrderContextProvider(props) {
     });
   }
 
+  function resetHandler() {
+    setOrderItems([]);
+  }
   const context = {
     items: orderItems,
     increaseQuantity: incrementItemHandler,
     decreaseQuantity: decrementItemHandler,
+    reset: resetHandler,
   };
 
   return (

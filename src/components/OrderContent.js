@@ -12,11 +12,13 @@ import {
 import ItemSelector from "./ItemSelector";
 import MenuContext from "../store/menuContext";
 import OrderContext from "../store/orderContext";
+import { useHistory } from "react-router-dom";
 
 function OrderContent(props) {
   //const menuStyle = { color: "white" };
   let fontTheme = createTheme();
   fontTheme = responsiveFontSizes(fontTheme);
+  const history = useHistory();
 
   const menuItemList = React.useContext(MenuContext).allItems;
   const order = React.useContext(OrderContext);
@@ -24,6 +26,7 @@ function OrderContent(props) {
 
   const [menuItems, setMenuItems] = React.useState([]);
   const [orderItems, setOrderItems] = React.useState([]);
+  let total = 0;
 
   const [isLoading, setIsLoading] = React.useState(true);
   const [refresh, setRefresh] = React.useState(true);
@@ -45,12 +48,29 @@ function OrderContent(props) {
   }
 
   let getQuantity = (id) => {
-    if (orderItemList) {
-      let getIndex = orderItemList.findIndex((item) => item.id === id);
-      if (getIndex >= 0) return orderItemList[getIndex].quantity;
+    if (orderItems) {
+      let getIndex = orderItems.findIndex((item) => item.id === id);
+      if (getIndex >= 0) return orderItems[getIndex].quantity;
       else return 0;
     }
     return 0;
+  };
+
+  let getTotal = () => {
+    orderItems.map((item) => {
+      total += menuItems[item.id - 1].price * item.quantity;
+    });
+    return total;
+  };
+
+  const placeOrder = () => {
+    order.reset();
+    fetch("https://mui-4-f408f-default-rtdb.firebaseio.com/orders.json", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(orderItems),
+    });
+    history.push("/");
   };
 
   return (
@@ -113,13 +133,13 @@ function OrderContent(props) {
                   }}
                   variant="h3"
                 >
-                  2,300
+                  {getTotal()}
                 </Typography>
               </ThemeProvider>
             </Grid>
           </Box>
           <Grid>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" onClick={placeOrder}>
               <ThemeProvider theme={fontTheme}>
                 <Typography
                   style={{
@@ -142,7 +162,6 @@ function OrderContent(props) {
             }}
           >
             {orderItems.map((orderItem) => {
-              console.log(orderItem.id - 1);
               return (
                 <ItemSelector
                   key=""
