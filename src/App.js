@@ -3,7 +3,7 @@ import MainDisplay from "./components/MainDisplay";
 //import { MenuContextProvider } from "./store/menuContext";
 import { OrderContextProvider } from "./store/orderContext";
 import MenuContext from "./store/menuContext";
-import data from "./store/mui-4-data.json";
+import data from "./store/mui-4-data.json"; //Used in place of firebase
 
 function App() {
   const menuSet = React.useContext(MenuContext);
