@@ -179,13 +179,11 @@ function OrderContent(props) {
                 />
               );
             })}
-
             <Divider
               variant="middle"
               style={{ border: "1px solid #f50057", marginBottom: 20 }}
-
-              // Show items with 0 quantity HERE below divider
             />
+            {/* Show items with 0 quantity HERE below divider */}
           </Box>
         </Grid>
       </Grid>
