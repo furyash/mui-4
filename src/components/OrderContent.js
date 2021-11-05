@@ -8,6 +8,7 @@ import {
   ThemeProvider,
   Divider,
   Button,
+  Hidden,
 } from "@material-ui/core";
 import ItemSelector from "./ItemSelector";
 import MenuContext from "../store/menuContext";
@@ -73,6 +74,71 @@ function OrderContent(props) {
     history.push("/");
   };
 
+  const orderTitle = (
+    <ThemeProvider theme={fontTheme}>
+      <Typography
+        style={{
+          textAlign: "center",
+          marginRight: 20,
+          textShadow: "3px 3px 5px #f50057",
+        }}
+        variant="h2"
+      >
+        Order Items
+      </Typography>
+    </ThemeProvider>
+  );
+
+  const priceBox = (
+    <div>
+      <Box
+        style={{
+          padding: 15,
+          paddingLeft: 20,
+          backgroundColor: "rgba(25, 12, 43, 0.596)",
+        }}
+      >
+        <Grid item>
+          <ThemeProvider theme={fontTheme}>
+            <Typography
+              style={{
+                textAlign: "left",
+                textShadow: "3px 3px 5px #f50057",
+              }}
+              variant="h4"
+            >
+              Total Price (Rs.)
+            </Typography>
+            <Typography
+              style={{
+                color: "#f50057",
+                textAlign: "left",
+                marginRight: 20,
+              }}
+              variant="h3"
+            >
+              {getTotal()}
+            </Typography>
+          </ThemeProvider>
+        </Grid>
+      </Box>
+      <Grid>
+        <Button variant="contained" color="secondary" onClick={placeOrder}>
+          <ThemeProvider theme={fontTheme}>
+            <Typography
+              style={{
+                textTransform: "capitalize",
+              }}
+              variant="h4"
+            >
+              Place Order
+            </Typography>
+          </ThemeProvider>
+        </Button>
+      </Grid>
+    </div>
+  );
+
   return (
     <Box
       sx={{
@@ -91,68 +157,16 @@ function OrderContent(props) {
           md={6}
           lg={5}
         >
-          <Grid item>
-            <Box style={{ height: "50vh" }}>
-              <ThemeProvider theme={fontTheme}>
-                <Typography
-                  style={{
-                    textAlign: "center",
-                    marginRight: 20,
-                    textShadow: "3px 3px 5px #f50057",
-                  }}
-                  variant="h2"
-                >
-                  Order Items
-                </Typography>
-              </ThemeProvider>
-            </Box>
-          </Grid>
-          <Box
-            style={{
-              padding: 15,
-              paddingLeft: 20,
-              backgroundColor: "rgba(25, 32, 43, 0.596)",
-            }}
-          >
+          <Hidden smDown>
             <Grid item>
-              <ThemeProvider theme={fontTheme}>
-                <Typography
-                  style={{
-                    textAlign: "left",
-                    textShadow: "3px 3px 5px #f50057",
-                  }}
-                  variant="h4"
-                >
-                  Total Price (Rs.)
-                </Typography>
-                <Typography
-                  style={{
-                    color: "#f50057",
-                    textAlign: "left",
-                    marginRight: 20,
-                  }}
-                  variant="h3"
-                >
-                  {getTotal()}
-                </Typography>
-              </ThemeProvider>
+              <Box style={{ height: "50vh" }}>{orderTitle}</Box>
             </Grid>
-          </Box>
-          <Grid>
-            <Button variant="contained" color="secondary" onClick={placeOrder}>
-              <ThemeProvider theme={fontTheme}>
-                <Typography
-                  style={{
-                    textTransform: "capitalize",
-                  }}
-                  variant="h4"
-                >
-                  Place Order
-                </Typography>
-              </ThemeProvider>
-            </Button>
-          </Grid>
+            {priceBox}
+          </Hidden>
         </Grid>
+        <Hidden mdUp>
+          <Grid item>{orderTitle}</Grid>
+        </Hidden>
         <Grid item xs={12} md={6} lg={5}>
           <Box
             style={{
@@ -186,6 +200,7 @@ function OrderContent(props) {
             {/* Show items with 0 quantity HERE below divider */}
           </Box>
         </Grid>
+        <Hidden mdUp>{priceBox}</Hidden>
       </Grid>
     </Box>
   );
